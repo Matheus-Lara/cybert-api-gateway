@@ -27,3 +27,16 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
+  products:
+    image: 'ghcr.io/matheus-lara/products-microservice:latest'
+    container_name: 'products'
+    ports:
+      - "3081:3081"
+    restart: 'always'
+  mongo-db:
+    image: mongo
+    ports:
+      - "27017:27017"
+    container_name: mongo-db
+    volumes:
+      - ./db/:/data/db
