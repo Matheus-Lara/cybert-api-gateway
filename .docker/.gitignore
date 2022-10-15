@@ -1,2 +1,4 @@
 /data/mysql
 /.env
+/db
+/logs
