@@ -39,4 +39,4 @@ services:
       - "${PRODUCTS_DATABASE_PORT}:27017"
     container_name: mongo-db
     volumes:
-      - ./db/:/data/db
+      - ./data/mongodb:/data/mongo

@@ -1,4 +1,4 @@
 /data/mysql
+/data/mongodb
 /.env
-/db
 /logs
