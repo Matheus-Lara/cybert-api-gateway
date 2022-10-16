@@ -31,12 +31,12 @@ services:
     image: 'ghcr.io/matheus-lara/products-microservice:latest'
     container_name: 'products'
     ports:
-      - "3081:3081"
+      - "${HOST_MACHINE_PRODUCTS_PORT}:3081"
     restart: 'always'
   mongo-db:
     image: mongo
     ports:
-      - "27017:27017"
+      - "${PRODUCTS_DATABASE_PORT}:27017"
     container_name: mongo-db
     volumes:
       - ./db/:/data/db
