@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\GatewayRouteResolver;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\JsonResponse;
 
 class GatewayController extends Controller {
@@ -19,9 +20,16 @@ class GatewayController extends Controller {
 		$requestBody = GatewayRouteResolver::$requestBody;
 
 		$client = new Client();
-		$response = $client->request($requestMethod, $uri, [
-			'json' => $requestBody
-		]);
+		try {
+			$response = $client->request($requestMethod, $uri, [
+				'json' => $requestBody
+			]);
+		} catch (ClientException $e) {
+			return response()->json(
+				json_decode($e->getResponse()->getBody()->getContents(), true), 
+				$e->getResponse()->getStatusCode()
+			);
+		}
 
 		$responseContent = json_decode($response->getBody()->getContents());
 		return response()
